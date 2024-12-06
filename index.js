@@ -17,14 +17,14 @@ const options = {
       },
     },
     servers: [
+        {
+            url: 'https://food-service-d1ed0096c526.herokuapp.com/api',
+            description: 'Production server',
+          },
       {
         url: 'http://localhost:3000/api',
         description: 'Development server',
       },
-      {
-        url: 'https://simple-express-proj-b3a02135f433.herokuapp.com/',
-        description: 'Production server',
-      }
     ]
   },
   apis: ['./index.js'], // files containing annotations as above
