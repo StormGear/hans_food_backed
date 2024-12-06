@@ -61,7 +61,7 @@ app.get('/api', (req, res) => {
  * @swagger
  * tags:
  *   name: User Management
- *   description: API for managing users
+ *   description: Routes for managing users
  */
 
 /**
