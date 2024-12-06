@@ -20,7 +20,7 @@ const options = {
         {
             url: 'https://food-service-d1ed0096c526.herokuapp.com/api',
             description: 'Production server',
-          },
+        },
       {
         url: 'http://localhost:3000/api',
         description: 'Development server',
