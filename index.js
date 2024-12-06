@@ -11,10 +11,6 @@ const options = {
     info: {
       title: 'Food Service API',
       version: '1.0.0',
-      contact: {
-        name: 'By Papa Kofi',
-        url: 'papakofi.tech',
-      },
     },
     servers: [
         {
