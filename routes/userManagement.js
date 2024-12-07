@@ -14,7 +14,14 @@ const client = new Client({
   }
 });
 
-client.connect();
+const connectToDb = async () => {
+  try {
+    await client.connect();
+  } catch (e) {
+    console.log('Error connecting to the db server', e.toString());
+  }
+}
+connectToDb();
 
 
 const getAllUsers = (req, res) => {
@@ -30,7 +37,7 @@ try {
 
 const getUserById = (req, res) => {
   const id = req.params.id;
-  client.query('SELECT * FROM public.users WHERE id = $1;', [id],  (err, results) => {
+  client.query('SELECT * FROM public.users WHERE user_id = $1;', [id],  (err, results) => {
     try {
       if (err) throw err;
       res.status(200).json(results.rows[0]);
@@ -65,14 +72,45 @@ const createUser = async (req, res) => {
   }
   }
 
+  const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      // Retrieve the user from the database
+      const query = 'SELECT * FROM public.users WHERE email = $1';
+      const result = await client.query(query, [email]);
+  
+      if (result.rows.length === 0) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+  
+      const user = result.rows[0];
+  
+      // Compare the provided password with the hashed password
+      const match = await bcrypt.compare(password, user.password);
+  
+      if (!match) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+  
+      res.status(200).json({ message: 'Login successful' });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
 
 const updateUser = (req, res) => {
   const id = req.params.id;
-  const { name, email} = req.body;
+  const { name, email, allergies} = req.body;
   if (!name || !email) {
-    return res.status(400).json({ error: 'Name and email are required' });
+    return res.status(400).json({ error: 'Name or email are required' });
   }
-  client.query('UPDATE public.users SET name = $1, email = $2 WHERE id = $3 RETURNING *;', [name, email, id], (err, results) => {
+
+  const updatedAt = new Date().toISOString();
+  const query = 'UPDATE public.users SET name = $1, email = $2, allergies = $3, updated_at = $4 WHERE user_id = $5 RETURNING *;'
+  const values = [name, email, allergies, updatedAt, id]
+  client.query(query, values, (err, results) => {
     try {
       if (err) throw err;
       res.status(200).json(results.rows[0]);
@@ -112,6 +150,8 @@ module.exports = {
     getAllUsers,
     getUserById,
     createUser,
+    loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    client
 };
