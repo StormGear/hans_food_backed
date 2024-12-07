@@ -1,6 +1,4 @@
-const express = require('express');
-const orderRouter = express.Router();
-const client = require('./userManagement');
+const client = require('../controllers/userManagement');
 const orderClient = client.client;
 
 const getAllOrders = (req, res) => {

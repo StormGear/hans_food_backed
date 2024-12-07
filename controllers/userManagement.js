@@ -1,5 +1,3 @@
-const express = require('express');
-const router = express.Router();
 const { Client } = require('pg');
 require('dotenv').config(); // read .env files
 const bcrypt = require('bcrypt');
@@ -36,8 +34,8 @@ try {
 }
 
 const getUserById = (req, res) => {
-  const id = req.params.id;
-  client.query('SELECT * FROM public.users WHERE user_id = $1;', [id],  (err, results) => {
+  const user_id = req.params.user_id;
+  client.query('SELECT * FROM public.users WHERE user_id = $1;', [user_id],  (err, results) => {
     try {
       if (err) throw err;
       res.status(200).json(results.rows[0]);
@@ -101,7 +99,7 @@ const createUser = async (req, res) => {
 
 
 const updateUser = (req, res) => {
-  const id = req.params.id;
+  const user_id = req.params.user_id;
   const { name, email, allergies} = req.body;
   if (!name || !email) {
     return res.status(400).json({ error: 'Name or email are required' });
@@ -109,7 +107,7 @@ const updateUser = (req, res) => {
 
   const updatedAt = new Date().toISOString();
   const query = 'UPDATE public.users SET name = $1, email = $2, allergies = $3, updated_at = $4 WHERE user_id = $5 RETURNING *;'
-  const values = [name, email, allergies, updatedAt, id]
+  const values = [name, email, allergies, updatedAt, user_id]
   client.query(query, values, (err, results) => {
     try {
       if (err) throw err;
@@ -122,8 +120,8 @@ const updateUser = (req, res) => {
 
 
 const deleteUser = (req, res) => {
-  const id = parseInt(req.params.id);
-  client.query('DELETE FROM public.users WHERE id = $1;', [id],  (err, results) => {
+  const user_id = parseInt(req.params.user_id);
+  client.query('DELETE FROM public.users WHERE id = $1;', [user_id],  (err, results) => {
     try {
       if (err) throw err;
       res.status(200).json({ message: 'User deleted successfully' });
@@ -133,20 +131,8 @@ const deleteUser = (req, res) => {
   });
 }
 
-router.get('/params/:name/:age', (req, res) => {
-    const data = {
-        name: req.params.name,
-        age: req.params.age
-    }
-
-    res.json({
-        name,
-        age
-    });
-})
 
 module.exports = {
-    router,
     getAllUsers,
     getUserById,
     createUser,
