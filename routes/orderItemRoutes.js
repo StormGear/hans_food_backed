@@ -52,6 +52,10 @@ router.get('/api/orderitems', orderItem.getAllOrderItems);
  *     tags: [Order Item Management]
  *     description: Retrieve a list of all order items with a given order id
  *     summary: Get all order items with a given order id
+ *     parameters:
+ *       - in: path
+ *         name: order_id
+ *         required: true
  *     responses:
  *       200:
  *         description: A list of all order items by order id
@@ -84,12 +88,31 @@ router.get('/api/orderitems/:order_id', orderItem.getAllOrderItemsByOrderId);
 /**
  * @swagger
  * /orderitems/create-orderitem:
- *   get:
+ *   post:
  *     tags: [Order Item Management]
  *     description: Create a new order item
  *     summary: Create a new order item
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *           schema:
+ *              type: object
+ *              properties:
+ *                order_id:
+ *                   type: integer
+ *                   example: 1
+ *                menuitem_id:
+ *                   type: integer
+ *                   example: 1
+ *                extra_toppings:
+ *                   type: string[]
+ *                   example: ["cheese"]
+ *                quantity:
+ *                   type: integer
+ *                   example: 1
  *     responses:
- *       200:
+ *       201:
  *         description: A new order item has been created
  *         content:
  *           application/json:

@@ -58,11 +58,15 @@ router.get('/api/cart',  cart.getAllCarts);
 
 /**
  * @swagger
- * /cart/{cart_id}:
+ * /cart/{user_id}:
  *   get:
  *     tags: [Cart Management]
  *     description: Retrieve a list of all cart items by cart id
  *     summary: Get all cart items by cart id
+ *     parameters:
+ *      - in: path
+ *        name: user_id
+ *        required: true
  *     responses:
  *       200:
  *         description: A list of all order items by order id
@@ -93,7 +97,7 @@ router.get('/api/cart',  cart.getAllCarts);
  *                          example: 1
  *  
  */
-router.get('/api/cart/:cart_id', cart.getCartByCartId);
+router.get('/api/cart/:user_id', cart.getCartByUserId);
 
 /**
  * @swagger
@@ -102,6 +106,19 @@ router.get('/api/cart/:cart_id', cart.getCartByCartId);
  *     tags: [Cart Management]
  *     description: Create a cart
  *     summary: Create a cart
+ *     requestBody:
+ *      required: true
+ *      content:
+ *         application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               user_id: 
+ *                 type: integer
+ *                 example: 1
+ *               order_items:
+ *                 type: integer[]
+ *                 example: [ 1, 2, 3]
  *     responses:
  *       200:
  *         description: A new cart has been created
@@ -110,21 +127,12 @@ router.get('/api/cart/:cart_id', cart.getCartByCartId);
  *             schema:
  *                      type: object
  *                      properties:
- *                       orderitem_id:
+ *                       cart_id:
 *                           type: integer
 *                           example: 1
- *                       order_id:
- *                          type: integer
- *                          example: 1
- *                       menuitem_id:
- *                          type: integer
- *                          example: 1
- *                       extra_toppings:
- *                          type: string[]
- *                          example: ["cheese"]
- *                       quantity:
- *                          type: integer
- *                          example: 1         
+ *                       order_items:
+ *                          type: integer[]
+ *                          example: [ 1, 2, 3]
  *                       user_id:
  *                          type: integer
  *                          example: 1

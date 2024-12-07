@@ -48,6 +48,48 @@ router.get('/api/orders/', order.getAllOrders);
 
 /**
  * @swagger
+ * /orders/{user_id}:
+ *   get:
+ *     tags: [Order Management]
+ *     description: Retrieve a list of all orders given a user id
+ *     summary: Get all orders by user id
+ *     parameters:
+ *       - in: path
+ *         name: user_id
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: A list of orders.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   order_id:
+ *                     type: integer
+ *                     example: 1
+ *                   user_id:
+ *                     type: integer
+ *                     example: 1
+ *                   order_date:
+ *                     type: timestamp
+ *                     example: 2024-12-07 12:00:00
+ *                   order_status:
+ *                     type: string
+ *                     enum: [preparing, ready, completed]
+ *                     example: preparing
+ *                   updated_at:
+ *                     type:  timestamp
+ *                     example: 2024-12-07 12:00:00
+ *  
+ */
+router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
+
+
+/**
+ * @swagger
  * /orders/add-order/{user_id}:
  *   post:
  *     tags: [Order Management]

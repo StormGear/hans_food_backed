@@ -46,7 +46,7 @@ const getUserById = (req, res) => {
 }
 
 const createUser = async (req, res) => {
-  const {  name, email, password, allergies, created_at, updated_at } = req.body;
+  const {  name, email, password, allergies } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Name or email or password are required' });
   }
@@ -54,8 +54,8 @@ const createUser = async (req, res) => {
   try {
      // Hash the password
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const query = 'INSERT INTO public.users(name, email, password, allergies, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;';
-    const values = [name, email, hashedPassword, allergies, created_at, updated_at];
+    const query = 'INSERT INTO public.users(name, email, password, allergies) VALUES($1, $2, $3, $4) RETURNING *;';
+    const values = [name, email, hashedPassword, allergies];
 
     client.query(query, values,  (err, results) => {
     try {

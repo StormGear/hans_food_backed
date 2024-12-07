@@ -56,12 +56,16 @@ router.get('/api/menuitems',  menuItem.getAllMenuItems);
  * /menuitems/{menuitem_id}:
  *   get:
  *     tags: [Menu Item Management]
- *     description: Retrieve a list of all order items by order id
- *     summary: Get all order items by order id
+ *     description: Retrieve a menu item by menu item id
+ *     summary: Get a menu item by menu item id
+ *     parameters:
+ *       - in: path
+ *         name: menuitem_id
+ *         required: true
  *     responses:
  *       200:
  *         description: A list of all order items by order id
-  *         content:
+ *         content:
  *           application/json:
  *             schema:
  *               type: array
@@ -89,9 +93,13 @@ router.get('/api/menuitems',  menuItem.getAllMenuItems);
  *                   updated_at:
  *                     type:  timestamp
  *                     example: 2024-12-07 12:00:00
+ *       400:
+ *         description: Menuitem id is required
+ *       500:
+ *         description: An error occurred while retrieving the menu item
  *  
  */
-router.get('/api/menuitems/:menuitem_id', menuItem.getAllMenuItemsByMenuItemId);
+router.get('/api/menuitems/:menuitem_id', menuItem.getMenuItemByMenuItemId);
 
 /**
  * @swagger
@@ -100,8 +108,28 @@ router.get('/api/menuitems/:menuitem_id', menuItem.getAllMenuItemsByMenuItemId);
  *     tags: [Menu Item Management]
  *     description: Create a new item on the menu
  *     summary: Create a new item on the menu
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                price:
+ *                 type: decimal(10, 2)
+ *                 example: 10.00
+ *                name:
+ *                  type: string
+ *                  example: Fufu and Light Soup
+ *                nutritional_info:
+ *                  type: string[]
+ *                  example: ["calories: 500", "fat: 20g"]
+ *                extra_toppings:
+ *                  type: string[]
+ *                  example: ["goat meat"]
+ * 
  *     responses:
- *       200:
+ *       201:
  *          description: A new menu item has been created
  *          content:
  *           application/json:

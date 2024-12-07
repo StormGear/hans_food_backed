@@ -14,10 +14,10 @@ const getAllMenuItems = (_, res) => {
   });
 }
 
-const getAllMenuItemsByMenuItemId = (req, res) => {
+const getMenuItemByMenuItemId = (req, res) => {
     const menuitem_id = req.params.menuitem_id;
 
-    if (!order_id) {
+    if (!menuitem_id) {
         res.status(400).json({message : "Menuitem id is required"});
     }
     const query = 'SELECT * FROM public.menuitem WHERE menuitem_id = $1'
@@ -54,6 +54,6 @@ const createMenuItem = (req, res) => {
 
 module.exports = {
     getAllMenuItems,
-    getAllMenuItemsByMenuItemId,
+    getMenuItemByMenuItemId,
     createMenuItem
 }

@@ -12,6 +12,24 @@ const getAllOrders = (req, res) => {
   });
 }
 
+const getAllOrdersByUserId = (req, res) => {
+    const user_id = req.params.user_id;
+
+    if (!user_id) {
+        res.status(400).json({ message: "User id is required"});
+    }
+
+    const query = 'SELECT * FROM public.order WHERE user_id = $1';
+    orderClient.query(query, [user_id], (err, results) => {
+        try {
+            if (err) throw err;
+            res.status(200).json(results.rows);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+}
+
 const createOrder = (req, res) => {
     const user_id = req.params.user_id
 
@@ -55,5 +73,6 @@ const updateOrderStatus = (req, res) => {
 module.exports = {
     getAllOrders,
     createOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    getAllOrdersByUserId
 }

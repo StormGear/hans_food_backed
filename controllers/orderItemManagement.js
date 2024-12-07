@@ -34,11 +34,11 @@ const getAllOrderItemsByOrderId = (req, res) => {
 const createOrderItem = (req, res) => {
     const { order_id, menuitem_id, extra_toppings, quantity } = req.body;
     
-    if (!order_id || menuitem_id) {
+    if (!order_id || !menuitem_id) {
         return res.status(400).json({ message: "Order id and menuitem id are required" });
     }
 
-    const query = 'INSERT INTO public.order_item(order_id, menuitem_id, extra_toppings, quantity) VALUES($1, $2, $3, $4, $5) RETURNING *;'
+    const query = 'INSERT INTO public.order_item(order_id, menuitem_id, extra_toppings, quantity) VALUES($1, $2, $3, $4) RETURNING *;'
     const values = [order_id, menuitem_id, extra_toppings, quantity]
 
     orderItemClient.query(query, values, (err, results) => {

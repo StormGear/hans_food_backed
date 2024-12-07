@@ -112,12 +112,6 @@ router.get('/api/users/:user_id', user.getUserById);
  *               allergies:
  *                 type: string[]
  *                 example: ["peanuts"]
- *               created_at:
- *                 type: timestamp
- *                 example: 2024-12-07 12:00:00
- *               updated_at:
- *                 type:  timestamp
- *                 example: 2024-12-07 12:00:00
  *     responses:
  *       201:
  *         description: User created successfully.
