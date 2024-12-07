@@ -38,8 +38,14 @@ app.use(express.json()); // Middleware to parse JSON bodies
 // register the routes in the app
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const orderItemRoutes = require('./routes/orderItemRoutes');
+const menuItemRoutes = require('./routes/menuItemRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 app.use(userRoutes);
 app.use(orderRoutes);
+app.use(orderItemRoutes);
+app.use(menuItemRoutes);
+app.use(cartRoutes);
 
 /**
  * @swagger
@@ -54,20 +60,6 @@ app.use(orderRoutes);
 app.get('/api', (req, res) => {
   res.render('welcome');
 });
-
-/**
- * @swagger
- * tags:
- *   name: User Management
- *   description: Routes for managing users
- */
-
-/**
- * @swagger
- * tags:
- *   name: Order Management
- *   description: Routes for managing orders
- */
 
 
 

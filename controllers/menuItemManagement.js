@@ -3,7 +3,7 @@ const menuItemRouter = express.Router();
 const client = require('./userManagement');
 const menuItemClient = client.client;
 
-const getAllMenuItems = (req, res) => {
+const getAllMenuItems = (_, res) => {
     menuItemClient.query('SELECT * FROM public.menuitem;', async (err, results) => {
   try {
     if (err) throw err;

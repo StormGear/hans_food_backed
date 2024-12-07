@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const order = require('../controllers/orderManagement');
 
+/** 
+* @swagger
+* tags:
+*   name: Order Item Management
+*   description: Routes for managing order items
+*/
+
 /**
  * @swagger
  * /orders:
@@ -50,17 +57,30 @@ router.get('/api/orders/', order.getAllOrders);
  *       - in: path
  *         name: user_id
  *         required: true
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             user_id:
- *               type: integer
- *               example: 1
  *     responses:
  *       201:
  *         description: Order created successfully.
+ *         content:
+ *          application/json:
+ *              schema:
+*                 type: object
+*                 properties:
+*                   order_id:
+*                     type: integer
+*                     example: 1
+*                   user_id:
+*                     type: integer
+*                     example: 1
+*                   order_date:
+*                     type: timestamp
+*                     example: 2024-12-07 12:00:00
+*                   order_status:
+*                     type: string
+*                     enum: [preparing, ready, completed]
+*                     example: preparing
+*                   updated_at:
+*                     type:  timestamp
+*                     example: 2024-12-07 12:00:00
  *       400:
  *         description: User id is required
  *       500:

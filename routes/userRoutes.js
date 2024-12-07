@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const user = require('../controllers/userManagement');
 
+/**
+ * @swagger
+ * tags:
+ *   name: User Management
+ *   description: Routes for managing users
+ */
 
 /**
  * @swagger
