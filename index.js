@@ -140,15 +140,27 @@ app.get('/api/users/:id', user.getUserById);
  *             properties:
  *               name:
  *                 type: string
- *                 example: John Doe
+ *                 example: Test User
  *               email:
  *                 type: string
- *                 example: johndoe@example.com
+ *                 example: testuser@example.com
+ *               password:
+ *                 type: string
+ *                 example: password123
+ *               allergies:
+ *                 type: string[]
+ *                 example: ["peanuts"]
+ *               created_at:
+ *                 type: timestamp
+ *                 example: 2024-12-07 12:00:00
+ *               updated_at:
+ *                 type:  timestamp
+ *                 example: 2024-12-07 12:00:00
  *     responses:
  *       201:
  *         description: User created successfully.
  *       400:
- *         description: Name and email are required
+ *         description: Name or email or password are required
  *       500:
  *          description: Internal server error
  */

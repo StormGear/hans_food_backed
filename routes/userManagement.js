@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { Client } = require('pg');
 require('dotenv').config(); // read .env files
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 // connect to the database
 const client = new Client({
@@ -37,20 +40,31 @@ const getUserById = (req, res) => {
   });
 }
 
-const createUser = (req, res) => {
-  const {  name, email } = req.body;
-  if (!name || !email) {
-    return res.status(400).json({ error: 'Name and email are required' });
+const createUser = async (req, res) => {
+  const {  name, email, password, allergies, created_at, updated_at } = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: 'Name or email or password are required' });
   }
-  client.query('INSERT INTO public.users(name, email) VALUES($1, $2) RETURNING *;', [name, email],  (err, results) => {
+
+  try {
+     // Hash the password
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const query = 'INSERT INTO public.users(name, email, password, allergies, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;';
+    const values = [name, email, hashedPassword, allergies, created_at, updated_at];
+
+    client.query(query, values,  (err, results) => {
     try {
       if (err) throw err;
       res.status(201).json(results.rows[0]);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
-  });
-}
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+  }
+
 
 const updateUser = (req, res) => {
   const id = req.params.id;
