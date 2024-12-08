@@ -122,7 +122,7 @@ router.get('/api/orderitems/:order_id', orderItem.getAllOrderItemsByOrderId);
  *                   orderitem_id:
  *                     type: integer
  *                     example: 1
- *                   order_id:
+ *                   order_id?:
  *                     type: integer
  *                     example: 1
  *                   menuitem_id:

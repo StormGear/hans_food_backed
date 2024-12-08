@@ -91,7 +91,7 @@ router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
 /**
  * @swagger
  * /orders/add-order/{user_id}:
- *   post:
+ *    post:
  *     tags: [Order Management]
  *     description: Create a new order
  *     summary: Add a new order
@@ -99,6 +99,16 @@ router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
  *       - in: path
  *         name: user_id
  *         required: true
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             order_items:
+ *               type: integer[]
+ *               example: [1, 2, 3] 
  *     responses:
  *       201:
  *         description: Order created successfully.
@@ -116,6 +126,9 @@ router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
 *                   order_date:
 *                     type: timestamp
 *                     example: 2024-12-07 12:00:00
+*                   order_items:
+*                     type: array
+*                     example: [1, 2, 3] 
 *                   order_status:
 *                     type: string
 *                     enum: [preparing, ready, completed]
