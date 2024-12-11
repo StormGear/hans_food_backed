@@ -76,16 +76,22 @@ const createUser = async (req, res) => {
     try {
       // Retrieve the user from the database
       const query = 'SELECT * FROM public.users WHERE email = $1 AND password = $2';
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
-
       const result = await client.query(query, [email, hashedPassword]);
       const user = result.rows[0];
-  
+
       if (result.rows.length === 0) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-  
-      res.status(200).json({ message: 'Login successful', user_id: user.user_id });
+
+      bcrypt.compare(password, result.rows[0].password, function(err, result) {
+        if (err) {
+          return res.status(401).json({ message: 'Invalid email or password' });
+        }
+        if (result) {
+          res.status(200).json({ message: 'Login successful', user_id: user.user_id });
+        }
+      });
+      
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
