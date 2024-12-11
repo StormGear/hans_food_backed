@@ -83,12 +83,15 @@ const createUser = async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
 
-      bcrypt.compare(password, result.rows[0].password, function(err, result) {
+      bcrypt.compare(password, user.password,  (err, result) => {
         if (err) {
+          console.log('Error comparing passwords', err);
           return res.status(401).json({ message: 'Invalid email or password' });
         }
         if (result) {
           return res.status(200).json({ message: 'Login successful', user_id: user.user_id });
+        } else {
+          return res.status(401).json({ message: 'Invalid email or password' });
         }
       });
       
