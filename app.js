@@ -4,6 +4,9 @@ const path = require('path');
 const hoganMiddleware = require('hogan-middleware');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors')
+
+app.use(cors())
 
 const options = {
   definition: {
