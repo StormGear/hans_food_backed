@@ -76,7 +76,7 @@ const createUser = async (req, res) => {
     try {
       // Retrieve the user from the database
       const query = 'SELECT * FROM public.users WHERE email = $1 AND password = $2';
-      const result = await client.query(query, [email, hashedPassword]);
+      const result = await client.query(query, [email, password]);
       const user = result.rows[0];
 
       if (result.rows.length === 0) {
