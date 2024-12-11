@@ -102,6 +102,9 @@ router.get('/api/orderitems/:order_id', orderItem.getAllOrderItemsByOrderId);
  *                order_id:
  *                   type: integer
  *                   example: 1
+ *                cart_id:
+ *                   type: integer
+ *                   example: 1
  *                menuitem_id:
  *                   type: integer
  *                   example: 1
@@ -122,7 +125,7 @@ router.get('/api/orderitems/:order_id', orderItem.getAllOrderItemsByOrderId);
  *                   orderitem_id:
  *                     type: integer
  *                     example: 1
- *                   order_id?:
+ *                   cart_id:
  *                     type: integer
  *                     example: 1
  *                   menuitem_id:

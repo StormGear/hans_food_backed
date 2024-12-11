@@ -91,7 +91,7 @@ const createUser = async (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
   
-      res.status(200).json({ message: 'Login successful' });
+      res.status(200).json({ message: 'Login successful', user_id: user.user_id });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

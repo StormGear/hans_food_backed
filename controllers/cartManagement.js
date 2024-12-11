@@ -31,14 +31,14 @@ const getCartByUserId = (req, res) => {
 
 
 const createCart = (req, res) => {
-    const { user_id, order_items } = req.body;
+    const { user_id } = req.body;
     
     if (!user_id) {
         return res.status(400).json({ message: "User id is required" });
     }
 
-    const query = 'INSERT INTO public.cart(user_id, order_items) VALUES($1, $2) RETURNING *;'
-    const values = [user_id, order_items]
+    const query = 'INSERT INTO public.cart(user_id) VALUES($1) RETURNING *;'
+    const values = [user_id]
 
     cartClient.query(query, values, (err, results) => {
         try {

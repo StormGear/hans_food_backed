@@ -181,6 +181,17 @@ router.put('/api/users/update-user/:user_id', user.updateUser);
  *     responses:
  *       200:
  *         description: User logged in successfully.
+  *         content:
+ *            application/json:
+ *              schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                  type: string
+ *                  example: Login successful
+ *                 user_id:
+ *                  type: integer
+ *                  example: 1
  *       401:
  *         description: Invalid email or password.
  *       500:

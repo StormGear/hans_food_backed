@@ -116,9 +116,6 @@ router.get('/api/cart/:user_id', cart.getCartByUserId);
  *               user_id: 
  *                 type: integer
  *                 example: 1
- *               order_items:
- *                 type: integer[]
- *                 example: [1, 2, 3]
  *     responses:
  *       200:
  *         description: A new cart has been created
@@ -130,9 +127,6 @@ router.get('/api/cart/:user_id', cart.getCartByUserId);
  *                       cart_id:
 *                           type: integer
 *                           example: 1
- *                       order_items:
- *                          type: integer[]
- *                          example: [ 1, 2, 3]
  *                       user_id:
  *                          type: integer
  *                          example: 1
