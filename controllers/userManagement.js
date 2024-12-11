@@ -90,7 +90,7 @@ const createUser = async (req, res) => {
       const match = await bcrypt.compare(user.password, hashedPassword);
   
       if (!match) {
-        return res.status(200).json({ message: 'Invalid email or password' });
+        return res.status(401).json({ message: 'Invalid email or password' });
       }
   
       res.status(200).json({ message: 'Login successful', user_id: user.user_id });
