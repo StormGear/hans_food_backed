@@ -36,7 +36,7 @@ const createCartItem = (req, res) => {
         return res.status(400).json({ message: "menuitem id or cart_id are required" });
     }
 
-    const query = 'INSERT INTO "cart_item" (cart_id, menuitem_id, extra_toppings \
+    const query = 'INSERT INTO "cart_item" (cart_id, menuitem_id, extra_toppings) \
                     VALUES ($1, $2, $3) \
                     ON CONFLICT (cart_id, menuitem_id) \
                     DO NOTHING RETURNING *;'
