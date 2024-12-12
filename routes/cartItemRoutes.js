@@ -135,7 +135,7 @@ router.post('/api/cartitems/create-cartitem', cartItem.createCartItem);
 
 /**
  * @swagger
- * /cartitems/remove-cartitem/{cart_id}/{menuitem_id}:
+ * /cartitems/remove-cartitem/{cartitem_id}/{menuitem_id}:
  *   delete:
  *     tags: [Cart Item Management]
  *     description: remove a new cart item
@@ -159,7 +159,7 @@ router.post('/api/cartitems/create-cartitem', cartItem.createCartItem);
  *                   type: string
  *                   example: Cart item has been removed
  */
-router.delete('/api/cartitems/remove-cartitem/:cart_id/:menuitem_id', cartItem.removeCartItem)
+router.delete('/api/cartitems/remove-cartitem/:cartitem_id/:menuitem_id', cartItem.removeCartItem)
 
 
 /**
