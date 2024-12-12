@@ -189,8 +189,8 @@ router.put('/api/users/update-user/:user_id', user.updateUser);
  *                 message:
  *                  type: string
  *                  example: Login successful
- *                 user_id:
- *                  type: integer
+ *                 user:
+ *                  type: User Object
  *                  example: 1
  *       401:
  *         description: Invalid email or password.
