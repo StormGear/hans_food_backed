@@ -295,7 +295,7 @@ router.get('/api/cartitems/cart-total-cost/:cart_id', cartItem.totalCostOfAllCar
 /**
  * @swagger
  * /cartitems/clear-cart/{cart_id}:
- *   get:
+ *   delete:
  *     tags: [Cart Item Management]
  *     description: Clear all items in cart
  *     summary: Clear all items in cart
