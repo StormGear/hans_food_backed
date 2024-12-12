@@ -99,7 +99,7 @@ const getCartItemsAndTotalCostForEachItem = (req, res) => {
         res.status(400).json({message : "Cart id is required"});
     }
     const query = 'SELECT cart_item.cartitem_id, menuitem.name, menuitem.price, \
-                    cart_item.quantity, (menuitem.price * cart_item.quantity) AS total_price \
+                    cart_item.quantity, cart_item.extra_toppings, (menuitem.price * cart_item.quantity) AS total_price \
                     FROM cart_item \
                     JOIN menuitem ON cart_item.menuitem_id = menuitem.menuitem_id \
                     WHERE cart_item.cart_id = $1;'
