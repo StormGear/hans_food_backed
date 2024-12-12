@@ -135,24 +135,18 @@ router.post('/api/cartitems/create-cartitem', cartItem.createCartItem);
 
 /**
  * @swagger
- * /cartitems/remove-cartitem:
+ * /cartitems/remove-cartitem/{cart_id}/{menuitem_id}:
  *   delete:
  *     tags: [Cart Item Management]
  *     description: remove a new cart item
  *     summary: remove a new cart item
- *     requestBody:
+ *     parameters:
+ *      - in: path
+ *        name: cart_id
  *        required: true
- *        content:
- *          application/json:
- *           schema:
- *              type: object
- *              properties:
- *                cart_id:
- *                   type: integer
- *                   example: 1
- *                menuitem_id:
- *                   type: integer
- *                   example: 1
+ *      - in: path
+ *        name: menuitem_id
+ *        required: true
  *     responses:
  *       201:
  *         description: Cart item has been removed
@@ -165,7 +159,7 @@ router.post('/api/cartitems/create-cartitem', cartItem.createCartItem);
  *                   type: string
  *                   example: Cart item has been removed
  */
-router.delete('/api/cartitems/remove-cartitem', cartItem.removeCartItem)
+router.delete('/api/cartitems/remove-cartitem/:cart_id/:menuitem_id', cartItem.removeCartItem)
 
 
 /**

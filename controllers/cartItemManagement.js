@@ -53,10 +53,10 @@ const createCartItem = (req, res) => {
 }
 
 const removeCartItem = (req, res) => {
-    const { cart_id, menuitem_id } = req.body;
+    const { cart_id, menuitem_id } = req.params;
     
     if (!menuitem_id || !cart_id) {
-        return res.status(400).json({ message: "menuitem id or cart_id are required" });
+        return res.status(400).json({ message: "menuitem_id or cart_id are required" });
     }
 
     const query = 'DELETE FROM "cart_item" WHERE cart_id = $1 AND menuitem_id = $2 RETURNING *;'
