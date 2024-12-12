@@ -42,11 +42,13 @@ app.use(express.json()); // Middleware to parse JSON bodies
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const orderItemRoutes = require('./routes/orderItemRoutes');
+const cartItemRoutes = require('./routes/cartItemRoutes')
 const menuItemRoutes = require('./routes/menuItemRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 app.use(userRoutes);
 app.use(orderRoutes);
 app.use(orderItemRoutes);
+app.use(cartItemRoutes);
 app.use(menuItemRoutes);
 app.use(cartRoutes);
 
