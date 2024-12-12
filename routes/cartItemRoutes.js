@@ -97,9 +97,6 @@ router.get('/api/cartitems/:cart_id', cartItem.getAllCartItemsByCartId);
  *           schema:
  *              type: object
  *              properties:
- *                cartitem_id:
- *                   type: integer
- *                   example: 1
  *                cart_id:
  *                   type: integer
  *                   example: 1
@@ -109,9 +106,6 @@ router.get('/api/cartitems/:cart_id', cartItem.getAllCartItemsByCartId);
  *                extra_toppings:
  *                   type: string[]
  *                   example: ["cheese"]
- *                quantity:
- *                   type: integer
- *                   example: 1
  *     responses:
  *       201:
  *         description: A new cart item has been created

@@ -30,17 +30,17 @@ const getAllCartItemsByCartId = (req, res) => {
 }
 
 const createCartItem = (req, res) => {
-    const { cart_id, menuitem_id, extra_toppings, quantity } = req.body;
+    const { cart_id, menuitem_id, extra_toppings } = req.body;
     
     if (!menuitem_id || !cart_id) {
         return res.status(400).json({ message: "menuitem id or cart_id are required" });
     }
 
-    const query = 'INSERT INTO "cart_item" (cart_id, menuitem_id, quantity, extra_toppings \
-                    VALUES ($1, $2, $3, $4) \
+    const query = 'INSERT INTO "cart_item" (cart_id, menuitem_id, extra_toppings \
+                    VALUES ($1, $2, $3) \
                     ON CONFLICT (cart_id, menuitem_id) \
                     DO NOTHING RETURNING *;'
-    const values = [cart_id, menuitem_id, extra_toppings, quantity]
+    const values = [cart_id, menuitem_id, extra_toppings]
 
     cartItemClient.query(query, values, (err, results) => {
         try {
