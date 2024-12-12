@@ -173,8 +173,8 @@ router.delete('/api/cartitems/remove-cartitem', cartItem.removeCartItem)
  * /cartitems/update-cartitem-quantity:
  *   put:
  *     tags: [Cart Item Management]
- *     description: Create a new cart item
- *     summary: Create a new cart item
+ *     description: Update a cart item quantity
+ *     summary: Update a cart item quantity
  *     requestBody:
  *        required: true
  *        content:
@@ -182,10 +182,7 @@ router.delete('/api/cartitems/remove-cartitem', cartItem.removeCartItem)
  *           schema:
  *              type: object
  *              properties:
- *                cart_id:
- *                   type: integer
- *                   example: 1
- *                menuitem_id:
+ *                cartitem_id:
  *                   type: integer
  *                   example: 1
  *                quantity:

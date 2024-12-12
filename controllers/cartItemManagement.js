@@ -73,19 +73,19 @@ const removeCartItem = (req, res) => {
 }
 
 const updateQuantityOfCartItem = (req, res) => {
-    const { cart_id, menuitem_id, quantity } = req.body;
+    const { cartitem_id, quantity } = req.body;
     
-    if (!menuitem_id || !cart_id) {
-        return res.status(400).json({ message: "menuitem id or cart_id are required" });
+    if (!cartitem_id || !quantity) {
+        return res.status(400).json({ message: "cart item id or quantity are required" });
     }
 
-    const query = 'UPDATE "cart_item" SET quantity = $3 WHERE cart_id = $1 AND menuitem_id = $2 RETURNING *;'
-    const values = [cart_id, menuitem_id, quantity]
+    const query = 'UPDATE "cart_item" SET quantity = $2 WHERE cartitem_id = $1 RETURNING *;'
+    const values = [cartitem_id, quantity]
 
     cartItemClient.query(query, values, (err, results) => {
         try {
             if (err) throw err;
-            res.status(201).json(results.rows[0]);
+            res.status(201).json({ quantity: results.rows[0].quantity });
           } catch (err) {
             res.status(500).json({ error: err.message });
           }
@@ -98,7 +98,7 @@ const getCartItemsAndTotalCostForEachItem = (req, res) => {
     if (!cart_id) {
         res.status(400).json({message : "Cart id is required"});
     }
-    const query = 'SELECT cart_item.cartitem_id, menuitem.name, menuitem.price, \
+    const query = 'SELECT cart_item.cartitem_id, menuitem.menuitem_id, menuitem.name, menuitem.price, \
                     cart_item.quantity, cart_item.extra_toppings, (menuitem.price * cart_item.quantity) AS total_price \
                     FROM cart_item \
                     JOIN menuitem ON cart_item.menuitem_id = menuitem.menuitem_id \
