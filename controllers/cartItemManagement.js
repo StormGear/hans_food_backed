@@ -137,6 +137,23 @@ const totalCostOfAllCartItems = (req, res) => {
     })
 }
 
+const clearCartItems = (req, res) => {
+    const cart_id = req.params.cart_id;
+
+    if (!cart_id) {
+        res.status(400).json({message : "Cart id is required"});
+    }
+    const query = 'DELETE FROM cart_item WHERE cart_id = $1;'
+    cartItemClient.query(query, [cart_id], (err, _) => {
+        try {
+            if (err) throw err;
+            res.status(200).json({message: "Cart items have been cleared"});
+        } catch (err) {
+            res.status(500).json({error: err.message})
+        }
+    })
+}
+
 module.exports = {
     getAllCartItems,
     getAllCartItemsByCartId,
@@ -144,5 +161,6 @@ module.exports = {
     removeCartItem,
     updateQuantityOfCartItem,
     getCartItemsAndTotalCostForEachItem,
-    totalCostOfAllCartItems
+    totalCostOfAllCartItems,
+    clearCartItems
 }

@@ -244,6 +244,9 @@ router.put('/api/cartitems/update-cartitem-quantity', cartItem.updateQuantityOfC
  *                      cartitem_id:
  *                       type: integer
  *                       example: 1
+ *                      extra_toppings:
+ *                       type: string[]
+ *                       example: ["cheese"]
  *                      price:
  *                       type: integer
  *                       example: 1
@@ -288,6 +291,32 @@ router.get('/api/cartitems/allcart-totalcost/:cart_id', cartItem.getCartItemsAnd
  *  
  */
 router.get('/api/cartitems/cart-total-cost/:cart_id', cartItem.totalCostOfAllCartItems)
+
+/**
+ * @swagger
+ * /cartitems/clear-cart/{cart_id}:
+ *   get:
+ *     tags: [Cart Item Management]
+ *     description: Clear all items in cart
+ *     summary: Clear all items in cart
+ *     parameters:
+ *      - in: path
+ *        name: cart_id
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Cart items have been cleared
+ *         content:
+ *          application/json:
+ *           schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                   type: string
+ *                   example: Cart items have been cleared
+ *  
+ */
+router.delete('/api/cartitems/clear-cart/:cart_id', cartItem.clearCartItems)
 
 
 module.exports = router;
