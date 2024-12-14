@@ -95,10 +95,19 @@ router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
  *     tags: [Order Management]
  *     description: Create a new order
  *     summary: Add a new order
- *     parameters:
- *       - in: path
- *         name: user_id
- *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                user_id:
+ *                 type: integer
+ *                 example: 1
+ *                total_amount:
+ *                 type: integer
+ *                 example: 90
  *     responses:
  *       201:
  *         description: Order created successfully.
