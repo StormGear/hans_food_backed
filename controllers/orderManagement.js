@@ -31,7 +31,7 @@ const getAllOrdersByUserId = (req, res) => {
 }
 
 const createOrder = (req, res) => {
-    const { user_id,total_amount } = req.body;
+    const { user_id, total_amount } = req.body;
 
     if (!user_id || !total_amount) {
         res.status(400).json({ message: "User id is required"});
@@ -45,16 +45,16 @@ const createOrder = (req, res) => {
         new_order_id INT;  -- Variable to store the order_id of the newly inserted row \
       BEGIN \
         -- Insert a new row into the 'orders' table and capture the 'order_id' into the variable\
-        INSERT INTO "order" ($1, $2) \
-        VALUES (10, 90.00) \
+        INSERT INTO "order" (user_id, total_amount) \
+        VALUES ($1, $2) \
         RETURNING "order_id" INTO new_order_id; \
         \
       INSERT INTO "order_item" (order_id, menuitem_id, quantity, extra_toppings) \
       SELECT new_order_id, menuitem_id, quantity, extra_toppings \
       FROM "cart_item" \
-      WHERE cart_id = 10; \
+      WHERE cart_id = $1; \
 
-	   DELETE FROM "cart_item" WHERE cart_id = 10; \
+	   DELETE FROM "cart_item" WHERE cart_id = $1; \
 
     -- Optionally, do something with the returned value, like print it (for demonstration) \
       RETURNING new_order_id;\
