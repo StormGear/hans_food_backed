@@ -34,7 +34,7 @@ const createOrder = (req, res) => {
     const { user_id, total_amount } = req.body;
 
     if (!user_id || !total_amount) {
-        res.status(400).json({ message: "User id is required"});
+        res.status(400).json({ message: "User id or total amount is required"});
     }
 
     const query = `
