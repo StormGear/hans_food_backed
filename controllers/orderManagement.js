@@ -54,11 +54,11 @@ const createOrder = (req, res) => {
       FROM "cart_item" \
       WHERE cart_id = $1; \
 
-	   DELETE FROM "cart_item" WHERE cart_id = $1; \
+	    DELETE FROM "cart_item" WHERE cart_id = $1; \
 
     -- Optionally, do something with the returned value, like print it (for demonstration) \
       RETURNING new_order_id;\
-   END $$; \
+    END $$; \
     COMMIT;  -- Commit the transaction \
     `;
 

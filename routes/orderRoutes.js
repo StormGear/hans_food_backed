@@ -90,7 +90,7 @@ router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
 
 /**
  * @swagger
- * /orders/add-order/{user_id}:
+ * /orders/add-order:
  *    post:
  *     tags: [Order Management]
  *     description: Create a new order
@@ -137,7 +137,7 @@ router.get('/api/orders/:user_id', order.getAllOrdersByUserId);
  *       500:
  *          description: Internal server error
  */
-router.post('/api/orders/add-order/:user_id', order.createOrder);
+router.post('/api/orders/add-order', order.createOrder);
 
 
 /**
