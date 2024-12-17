@@ -30,6 +30,7 @@ const getAllOrdersByUserId = (req, res) => {
     });
 }
 
+
 const createOrder = (req, res) => {
     const { user_id, total_amount } = req.body;
 
@@ -37,30 +38,7 @@ const createOrder = (req, res) => {
         res.status(400).json({ message: "User id or total amount is required"});
     }
 
-    const query = `
-    BEGIN;  -- Start the transaction \
-     -- create order items from all items in the cart, total amount from previous query \
-      DO $$ \
-      DECLARE \
-        new_order_id INT;  -- Variable to store the order_id of the newly inserted row \
-      BEGIN \
-        -- Insert a new row into the 'orders' table and capture the 'order_id' into the variable\
-        INSERT INTO "order" (user_id, total_amount) \
-        VALUES ($1, $2) \
-        RETURNING "order_id" INTO new_order_id; \
-        \
-      INSERT INTO "order_item" (order_id, menuitem_id, quantity, extra_toppings) \
-      SELECT new_order_id, menuitem_id, quantity, extra_toppings \
-      FROM "cart_item" \
-      WHERE cart_id = $1; \
-
-	    DELETE FROM "cart_item" WHERE cart_id = $1; \
-
-    -- Optionally, do something with the returned value, like print it (for demonstration) \
-      RETURNING new_order_id;\
-    END $$; \
-    COMMIT;  -- Commit the transaction \
-    `;
+    const query = `SELECT * FROM place_order($2, $1)`;
 
     const values = [user_id, total_amount];
 
