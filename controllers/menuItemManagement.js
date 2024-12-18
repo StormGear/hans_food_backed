@@ -32,14 +32,14 @@ const getMenuItemByMenuItemId = (req, res) => {
 }
 
 const createMenuItem = (req, res) => {
-    const { price, name, nutritional_info, extra_toppings } = req.body;
+    const { price, name, nutritional_info, extra_toppings, image_url } = req.body;
     
     if (!price || !name || !nutritional_info) {
         return res.status(400).json({ message: "Price or name or nutritional_info are required" });
     }
 
-    const query = 'INSERT INTO public.menuitem(price, name, nutritional_info, extra_toppings) VALUES($1, $2, $3, $4) RETURNING *;'
-    const values = [price, name, nutritional_info, extra_toppings ]
+    const query = 'INSERT INTO public.menuitem(price, name, nutritional_info, extra_toppings, image_url) VALUES($1, $2, $3, $4, $5) RETURNING *;'
+    const values = [price, name, nutritional_info, extra_toppings, image_url ]
 
     menuItemClient.query(query, values, (err, results) => {
         try {

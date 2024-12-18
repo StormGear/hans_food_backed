@@ -127,7 +127,9 @@ router.get('/api/menuitems/:menuitem_id', menuItem.getMenuItemByMenuItemId);
  *                extra_toppings:
  *                  type: string[]
  *                  example: ["goat meat"]
- * 
+ *                image_url:
+ *                  type: string
+ *                  example: https://www.google.com/image.png
  *     responses:
  *       201:
  *          description: A new menu item has been created
