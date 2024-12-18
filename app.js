@@ -12,18 +12,18 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Food Service API',
+      title: 'HansFood API',
       version: '1.0.0',
     },
     servers: [
       {
+        url: 'https://food-service-backend.onrender.com/api',
+        description: 'Production server',
+    },
+      {
         url: 'http://localhost:3000/api',
         description: 'Development server',
       },
-        {
-            url: 'https://food-service-d1ed0096c526.herokuapp.com/api',
-            description: 'Production server',
-        },
     ]
   },
   apis: ['./index.js', './routes/*.js'], // files containing annotations as above
