@@ -45,12 +45,14 @@ const orderItemRoutes = require('./routes/orderItemRoutes');
 const cartItemRoutes = require('./routes/cartItemRoutes')
 const menuItemRoutes = require('./routes/menuItemRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const loyaltyRoutes = require('./routes/loyaltyProgramRoutes');
 app.use(userRoutes);
 app.use(orderRoutes);
 app.use(orderItemRoutes);
 app.use(cartItemRoutes);
 app.use(menuItemRoutes);
 app.use(cartRoutes);
+app.use(loyaltyRoutes);
 
 /**
  * @swagger
